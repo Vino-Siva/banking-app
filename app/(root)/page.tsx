@@ -1,10 +1,20 @@
-import React from "react";
+import HeaderBox from "@/components/HeaderBox";
 
 const Home = () => {
+  const loggedIn = { firstName: "Vinoth" };
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <section className="home">
+      <div className="home-content">
+        <header className="home-header">
+          <HeaderBox
+            type="greeting"
+            title="Welcome"
+            user={loggedIn?.firstName || "Guest"}
+            subtext="Access and manage your accounts and transactions efficiently"
+          />
+        </header>
+      </div>
+    </section>
   );
 };
 
