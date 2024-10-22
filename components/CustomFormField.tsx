@@ -7,10 +7,11 @@ import { Control, FieldPath } from "react-hook-form";
 import { authFormSchema } from "@/lib/utils";
 import { z } from "zod";
 
+const formSchema = authFormSchema("sign-up");
+
 interface CustomFormFieldProps {
-  control: Control<z.infer<typeof authFormSchema>>;
-  name: FieldPath<z.infer<typeof authFormSchema>>;
-  type: "tel" | "text" | "email" | "password" | "number";
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
   placeholder: string;
   autoComplete?: "on" | "off";
   label: string;
@@ -19,7 +20,6 @@ interface CustomFormFieldProps {
 const CustomFormField = ({
   control,
   name,
-  type,
   label,
   placeholder,
   autoComplete = "on",
@@ -40,17 +40,18 @@ const CustomFormField = ({
         name={name}
         render={({ field }) => (
           <div className="form-item">
-            <FormLabel className="form-label" htmlFor={type}>
+            <FormLabel className="form-label" htmlFor={name}>
               {label}
             </FormLabel>
             <div className="flex flex-col w-full">
               <FormControl>
                 <Input
+                  itemID={name}
                   placeholder={placeholder}
                   className="input-class"
-                  type={type}
+                  type={name}
                   autoComplete={autoComplete}
-                  id={type}
+                  id={name}
                   {...field}
                 />
               </FormControl>
