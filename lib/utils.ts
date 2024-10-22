@@ -195,11 +195,70 @@ export const getTransactionStatus = (date: Date) => {
   return date > twoDaysAgo ? "Processing" : "Success";
 };
 
-export const authFormSchema = z.object({
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long.",
-  }),
-});
+export const authFormSchema = (type: string) =>
+  z.object({
+    email: z.string().email({
+      message: "Invalid email address.",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters long.",
+    }),
+    firstName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(2, {
+            message: "First name must be at least 2 characters long.",
+          }),
+    lastName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(2, {
+            message: "Last name must be at least 2 characters long.",
+          }),
+    address1:
+      type === "sign-in"
+        ? z.string().optional()
+        : z
+            .string()
+            .min(5, {
+              message: "Address must be at least 5 characters long.",
+            })
+            .max(100, {
+              message: "Address must be at most 100 characters long.",
+            }),
+    city:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(2, {
+            message: "City must be at least 2 characters long.",
+          }),
+    state:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(2, {
+            message: "State must be at least 2 characters long.",
+          }),
+    postalCode:
+      type === "sign-in"
+        ? z.string().optional()
+        : z
+            .string()
+            .min(5, {
+              message: "Postal code must be at least 5 characters long.",
+            })
+            .max(10, {
+              message: "Postal code must be at most 10 characters long.",
+            }),
+    ssn:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(9, {
+            message: "SSN must be at least 9 characters long.",
+          }),
+    dob:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(10, {
+            message: "Date of birth must be at least 10 characters long.",
+          }),
+  });
