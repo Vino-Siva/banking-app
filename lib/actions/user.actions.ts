@@ -33,7 +33,7 @@ export const signUp = async (userData: SignUpParams) => {
       secure: true,
     });
 
-    parseStringify(newUserAccount);
+    return parseStringify(newUserAccount);
   } catch (error) {
     console.error("Unable to sign in: ", error);
   }
