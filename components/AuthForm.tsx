@@ -43,15 +43,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
       if (type === "sign-up") {
         const newUser = await signUp(data);
-        // setUser(newUser);
+        setUser(newUser);
       }
-      if (type === "sign-in") {
-        const res = await signIn(
-          email: data.email,
-          password: data.password,
-        );
-        if (res) router.push("/");
-      }
+      // if (type === "sign-in") {
+      //   const res = await signIn(
+      //     email: data.email,
+      //     password: data.password,
+      //   );
+      //   if (res) router.push("/");
+      // }
     } catch (error) {
       console.error("Unable to submit AuthForm: ", error);
     } finally {
