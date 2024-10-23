@@ -12,6 +12,7 @@ import CustomFormField from "./CustomFormField";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const [user, setUser] = useState(null);
@@ -41,15 +42,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
       // Need to Sign up with Appwrite and create a Plaid link token
 
       if (type === "sign-up") {
-        // const newUser = await signUp(data);
+        const newUser = await signUp(data);
         // setUser(newUser);
       }
       if (type === "sign-in") {
-        // const res = await signIn(
-        //   email: data.email,
-        //   password: data.password,
-        // );
-        // if (res) router.push("/");
+        const res = await signIn(
+          email: data.email,
+          password: data.password,
+        );
+        if (res) router.push("/");
       }
     } catch (error) {
       console.error("Unable to submit AuthForm: ", error);
