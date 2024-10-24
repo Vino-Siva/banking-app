@@ -29,6 +29,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       firstName: "",
       lastName: "",
       address1: "",
+      city: "",
       state: "",
       postalCode: "",
       ssn: "",
