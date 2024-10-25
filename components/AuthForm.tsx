@@ -15,8 +15,8 @@ import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: AuthFormProps) => {
-  const [user, setUser] = useState(null);
   const router = useRouter();
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = authFormSchema(type);
@@ -40,19 +40,17 @@ const AuthForm = ({ type }: AuthFormProps) => {
     setIsLoading(true);
 
     try {
-      // Need to Sign up with Appwrite and create a Plaid link token
-
       if (type === "sign-up") {
         const newUser = await signUp(data);
         setUser(newUser);
       }
-      // if (type === "sign-in") {
-      //   const res = await signIn(
-      //     email: data.email,
-      //     password: data.password,
-      //   );
-      //   if (res) router.push("/");
-      // }
+      if (type === "sign-in") {
+        const res = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+        if (res) router.push("/");
+      }
     } catch (error) {
       console.error("Unable to submit AuthForm: ", error);
     } finally {
