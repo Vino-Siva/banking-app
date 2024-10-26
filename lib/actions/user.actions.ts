@@ -1,6 +1,5 @@
 "use server";
 
-import React from "react";
 import { createAdminClient, createSessionClient } from "../server/appwrite";
 import { ID } from "node-appwrite";
 import { cookies } from "next/headers";
@@ -49,8 +48,10 @@ export const getLoggedInUser = async () => {
     const { account } = await createSessionClient();
     const user = await account.get();
 
+    if (!user) return null;
+
     return parseStringify(user);
   } catch (error) {
-    return null;
+    console.error("Unable to get logged in user", error);
   }
 };
