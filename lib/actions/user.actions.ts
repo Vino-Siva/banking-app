@@ -55,3 +55,16 @@ export const getLoggedInUser = async () => {
     console.error("Unable to get logged in user", error);
   }
 };
+
+export const logoutAccount = async () => {
+  try {
+    const { account } = await createSessionClient();
+
+    cookies().delete("appwrite-session");
+
+    return await account.deleteSession("current");
+  } catch (error) {
+    console.error("Unable to get logged in user", error);
+    throw new Error("Unable to get logged in user", { cause: error });
+  }
+};
